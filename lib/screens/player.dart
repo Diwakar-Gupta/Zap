@@ -1,33 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 class Player extends StatefulWidget {
+  final child = _PlayerState();
   @override
-  _PlayerState createState() => _PlayerState();
+  _PlayerState createState() => child;
+
+  Widget getControls() {
+    return child.controls;
+  }
 }
 
 class _PlayerState extends State<Player> {
+  final controls = Container(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text('<<'),
+        Text('||'),
+        Text('>>'),
+      ],
+    ),
+  );
+
+  var top;
+
+  @override
+  void initState() {
+    super.initState();
+    top = controls;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SolidBottomSheet(
-        headerBar: Container(
-          color: Theme.of(context).primaryColor,
-          height: 50,
-          child: Center(
-            child: Text("Swipe me!"),
-          ),
-        ),
-        body: Container(
-          color: Colors.white,
-          height: 30,
-          child: Center(
-            child: Text(
-              "Hello! I'm a bottom sheet :D",
-            ),
-          ),
-        ),
-        maxHeight: MediaQuery.of(context).size.height - 50,
-      );
+    return Center(
+      child: Container(
+        child: Text('data'),
+      ),
+    );
   }
 }

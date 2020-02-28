@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 import 'package:zap/screens/player.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../main.dart';
 
@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Player player = Player();
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -56,12 +57,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Center(
-          child: RaisedButton(
-        onPressed: (){},
-        child: Text('Welcome to Home.!'),
-      )),
-      bottomSheet: Player()
+      body: SlidingUpPanel(
+        minHeight: 55,
+        maxHeight: MediaQuery.of(context).size.height,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        collapsed: player.getControls(),
+        panel: player,
+        body: Center(
+          child: Text("home page"),
+        ),
+      ),
     );
   }
 }
+/*
+
+
+
+*/
