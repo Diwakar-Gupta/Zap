@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
+import 'package:zap/screens/player.dart';
 
 import '../main.dart';
 
@@ -10,21 +12,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.home),
               title: Text("Light Theme"),
-              onTap: (){
+              onTap: () {
                 changeTheme("light");
               },
             ),
             ListTile(
               leading: Icon(Icons.hotel),
               title: Text("Dark Theme"),
-              onTap: (){
+              onTap: () {
                 changeTheme("dark");
               },
             ),
@@ -32,54 +34,34 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               leading: Icon(Icons.home),
               title: Text("First Screen"),
-              onTap: (){},
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.hotel),
               title: Text("First Screen"),
-              onTap: (){},
+              onTap: () {},
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.home),
               title: Text("First Screen"),
-              onTap: (){},
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.hotel),
               title: Text("First Screen"),
-              onTap: (){},
+              onTap: () {},
             ),
             Divider()
           ],
         ),
       ),
-      body: new Center(
-        child: new Text('Welcome to Home.!'),
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.search,
-            size: 30,
-          ),
-          title: SizedBox.shrink(),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.local_pizza,
-            size: 30,
-          ),
-          title: SizedBox.shrink(),
-        ),
-        BottomNavigationBarItem(
-          icon: CircleAvatar(
-            radius: 15,
-            backgroundImage: NetworkImage('http://i.imgur.com/zL4krbz.jpg'),
-          ),
-          title: SizedBox.shrink(),
-        ),
-      ]),
+      body: Center(
+          child: RaisedButton(
+        onPressed: (){},
+        child: Text('Welcome to Home.!'),
+      )),
+      bottomSheet: Player()
     );
   }
 }
