@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zap/screens/player.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../main.dart';
+import 'package:zap/models/music.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,62 +9,38 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Player player = Player();
-    return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Light Theme"),
-              onTap: () {
-                changeTheme("light");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.hotel),
-              title: Text("Dark Theme"),
-              onTap: () {
-                changeTheme("dark");
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("First Screen"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.hotel),
-              title: Text("First Screen"),
-              onTap: () {},
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("First Screen"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.hotel),
-              title: Text("First Screen"),
-              onTap: () {},
-            ),
-            Divider()
-          ],
-        ),
-      ),
-      body: SlidingUpPanel(
-        minHeight: 55,
-        maxHeight: MediaQuery.of(context).size.height,
-        color: Theme.of(context).scaffoldBackgroundColor,
-        collapsed: player.getControls(),
-        panel: player,
-        body: Center(
-          child: Text("home page"),
-        ),
-      ),
-    );
+    return Expanded(
+        child: ListView.builder(
+            itemCount: songs.length,
+            itemBuilder: (BuildContext context, int index) {
+              Song song = songs[index];
+              return ListTile(
+                leading: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0, 2),
+                          blurRadius: 6,
+                        )
+                      ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                      height: 50,
+                      width: 50,
+                      image: AssetImage(song.imgPath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                title: Text(song.name, style: TextStyle(fontSize: 20)),
+                subtitle: Text(song.desc),
+                trailing: Icon(Icons.play_arrow),
+              );
+            }));
   }
 }
 /*

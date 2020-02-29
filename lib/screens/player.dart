@@ -35,8 +35,35 @@ class _PlayerState extends State<Player> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        child: Text('data'),
-      ),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2),
+                  blurRadius: 6,
+                )
+              ]),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6,
+                  )
+                ]),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image(
+                image: AssetImage("assets/images/img3.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          )),
     );
   }
 }
