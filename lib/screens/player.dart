@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Player extends StatefulWidget {
   final child = _PlayerState();
@@ -16,9 +17,9 @@ class _PlayerState extends State<Player> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('<<'),
-        Text('||'),
-        Text('>>'),
+        Icon(FontAwesomeIcons.poll),
+        Icon(FontAwesomeIcons.play),
+        Icon(FontAwesomeIcons.poo),
       ],
     ),
   );
