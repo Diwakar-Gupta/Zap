@@ -10,13 +10,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
-    var _duration = new Duration(seconds: 0);
+    var _duration = new Duration(seconds: 10);
     return new Timer(_duration, navigationPage);
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (_) => HomeScreen()));
+    //Navigator.pushReplacement( context, MaterialPageRoute(builder: (_) => HomeScreen()));
   }
 
   @override
@@ -27,22 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: <Widget>[
-          Particles(
-            20,
-            Colors.white,
-          ),
-          Center(
-            child: Text(
-              'splash Screen',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-          )
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+Container(
+  decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.3, 1],
+              colors: [Colors.red[900],Colors.indigo)),
+)
+      ],
     );
   }
 }

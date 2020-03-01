@@ -11,6 +11,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      // appBar: AppBar(
+
+      // ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -55,7 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: new Center(
-        child: new Text('Welcome to Home.!'),
+        child: new Text(
+          'Welcome to Home.!',
+          style: TextStyle(
+            fontFamily: 'Gilroy',
+            fontWeight: FontWeight.w500,
+            fontSize: 30,
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(
@@ -73,9 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
           title: SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
-          icon: CircleAvatar(
-            radius: 15,
-            backgroundImage: NetworkImage('http://i.imgur.com/zL4krbz.jpg'),
+          icon: Icon(
+            Icons.wb_sunny,
           ),
           title: SizedBox.shrink(),
         ),
