@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../main.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:zap/models/music.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,87 +8,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var playingSong = songs[2];
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      // appBar: AppBar(
-
-      // ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Light Theme"),
-              onTap: (){
-                changeTheme("light");
-              },
+    return ListView.builder(
+        padding: EdgeInsets.only(bottom: 55),
+        itemCount: songs.length,
+        itemBuilder: (BuildContext context, int index) {
+          Song song = songs[index];
+          return ListTile(
+            selected: playingSong == song ? true : false,
+            leading: CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage(song.imgPath),
             ),
-            ListTile(
-              leading: Icon(Icons.hotel),
-              title: Text("Dark Theme"),
-              onTap: (){
-                changeTheme("dark");
-              },
+            title: Text(song.name, style: TextStyle(fontSize: 20)),
+            subtitle: Text(song.desc),
+            trailing: Wrap(
+              spacing: 5,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: (){},
+                  child: Icon(FontAwesomeIcons.heart),
+                ),
+                GestureDetector(
+                  child: Icon(Icons.more_vert),
+                  onTap: () {
+                    showMenu(
+                      context: context,
+                      position: RelativeRect.fromLTRB(20, 20, 20, 20),
+                      items: [
+                        PopupMenuItem(child: Text('add')),
+                        PopupMenuItem(child: Text('play'))
+                      ],
+                    );
+                  },
+                ),
+              ],
             ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("First Screen"),
-              onTap: (){},
-            ),
-            ListTile(
-              leading: Icon(Icons.hotel),
-              title: Text("First Screen"),
-              onTap: (){},
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("First Screen"),
-              onTap: (){},
-            ),
-            ListTile(
-              leading: Icon(Icons.hotel),
-              title: Text("First Screen"),
-              onTap: (){},
-            ),
-            Divider()
-          ],
-        ),
-      ),
-      body: new Center(
-        child: new Text(
-          'Welcome to Home.!',
-          style: TextStyle(
-            fontFamily: 'Gilroy',
-            fontWeight: FontWeight.w500,
-            fontSize: 30,
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.search,
-            size: 30,
-          ),
-          title: SizedBox.shrink(),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.local_pizza,
-            size: 30,
-          ),
-          title: SizedBox.shrink(),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.wb_sunny,
-          ),
-          title: SizedBox.shrink(),
-        ),
-      ]),
-    );
+          );
+        });
   }
 }
