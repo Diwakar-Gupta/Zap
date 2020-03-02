@@ -27,13 +27,13 @@ class _MyAppState extends State<MyApp> {
       brightness: Brightness.light,
       primaryColor: Colors.blue,
       accentColor: Colors.cyan,
-      fontFamily: 'Georgia',
+      fontFamily: 'Gilroy',
     ),
     "dark": ThemeData(
       brightness: Brightness.dark,
       primaryColor: Colors.lightBlue[800],
       accentColor: Colors.cyan[600],
-      fontFamily: 'Georgia',
+      fontFamily: 'Gilroy',
     ),
   };
 
