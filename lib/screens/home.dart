@@ -1,18 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zap/models/music.dart';
 
 class HomeScreen extends StatelessWidget {
-   
-
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
     return ListView.builder(
         padding: EdgeInsets.only(bottom: 55),
         itemCount: songs.length,
@@ -26,7 +18,7 @@ class HomeScreen extends StatelessWidget {
 class SongWidget extends StatefulWidget {
   final Song song;
 
-  const SongWidget(this.song,{Key key}) : super(key: key);
+  const SongWidget(this.song, {Key key}) : super(key: key);
   @override
   _SongWidgetState createState() => _SongWidgetState();
 }
@@ -59,9 +51,7 @@ class _SongWidgetState extends State<SongWidget> {
                 : Icon(FontAwesomeIcons.heart),
           ),
           PopupMenuButton(
-            onSelected: (d) {
-              print(d);
-            },
+            onSelected: (d) {},
             itemBuilder: (_) => [
               PopupMenuItem(value: "1", child: Text('item 1')),
               PopupMenuItem(value: "2", child: Text('item 1')),
