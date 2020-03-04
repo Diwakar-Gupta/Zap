@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:zap/screens/home.dart';
 import 'package:zap/screens/player.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import '../main.dart';
 
 class Layout extends StatefulWidget {
@@ -11,9 +10,9 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
+
   @override
   Widget build(BuildContext context) {
-    Player player = Player();
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -62,8 +61,8 @@ class _LayoutState extends State<Layout> {
         minHeight: 55,
         maxHeight: MediaQuery.of(context).size.height,
         color: Theme.of(context).scaffoldBackgroundColor,
-        collapsed: player.getControls(),
-        panel: player,
+        collapsed: MiniControl(),
+        panel: Player(),
         body: HomeScreen(),
       ),
     );

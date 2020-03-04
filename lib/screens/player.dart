@@ -1,28 +1,17 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zap/audioplayer/audioplayer.dart';
 
 class Player extends StatefulWidget {
-  final AudioPlayerr audioPlayer;
-
-  Player({
-    Key key,
-    this.audioPlayer,
-  }) : super(key: key);
-
   final child = _PlayerState();
 
   @override
   _PlayerState createState() => child;
-
-  Widget getControls() {
-    return child.getMiniControl();
-  }
 }
 
 class _PlayerState extends State<Player> {
-  AudioPlayerr _audioPlayer;
   MiniControl _miniControl;
   Duration position;
 
@@ -31,20 +20,15 @@ class _PlayerState extends State<Player> {
   @override
   void initState() {
     super.initState();
-    if (widget.audioPlayer == null)
-      _audioPlayer = AudioPlayerr.getDefault();
-    else
-      _audioPlayer = widget.audioPlayer;
-    _miniControl = MiniControl(audioPlayer: _audioPlayer);
 
     position = Duration();
     playerState = AudioPlayerState.STOPPED;
 
-    _audioPlayer.getAudioPlayer().onDurationChanged.listen((Duration d) {
+    audoiPlayer.getAudioPlayer().onDurationChanged.listen((Duration d) {
       setState(() => position = d);
     });
 
-    _audioPlayer
+    audoiPlayer
         .getAudioPlayer()
         .onPlayerStateChanged
         .listen((AudioPlayerState s) {
@@ -78,27 +62,24 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.yellow,
-        child: Center(
-          child: Wrap(
-            direction: Axis.vertical,
-            children: <Widget>[
-              RaisedButton(
-                onPressed: () {},
-                child: Text('play'),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                child: Text('pause'),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                child: Text('resume'),
-              ),
-            ],
-          ),
+    return Container(
+      child: Center(
+        child: Wrap(
+          direction: Axis.vertical,
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {},
+              child: Text('play'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: Text('pause'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: Text('resume'),
+            ),
+          ],
         ),
       ),
     );
@@ -108,27 +89,54 @@ class _PlayerState extends State<Player> {
 }
 
 class MiniControl extends StatefulWidget {
-  const MiniControl({Key key, this.audioPlayer}) : super(key: key);
-
   @override
   _MiniControlState createState() => _MiniControlState();
-  final AudioPlayerr audioPlayer;
 }
 
 class _MiniControlState extends State<MiniControl> {
-  AudioPlayerr audioPlayer;
+  AudioPlayerState state;
 
   @override
   void initState() {
     super.initState();
-    if (widget.audioPlayer == null)
-      audioPlayer = AudioPlayerr.getDefault();
-    else
-      audioPlayer = widget.audioPlayer;
+    state = audoiPlayer.getAudioPlayer().state;
+    audoiPlayer
+        .getAudioPlayer()
+        .onPlayerStateChanged
+        .listen((AudioPlayerState s) {
+      setState(() {
+        setState(() {
+          state = s;
+        });
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Wrap(
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.spaceEvenly,
+        children: <Widget>[
+          IconButton(icon: Icon(FontAwesomeIcons.arrowLeft), onPressed: () {
+            audoiPlayer.previous();
+          }),
+          IconButton(
+              icon: (state == AudioPlayerState.PLAYING)
+                  ? Icon(FontAwesomeIcons.pause)
+                  : Icon(FontAwesomeIcons.play),
+              onPressed: () {
+                if (state == AudioPlayerState.PLAYING)
+                  audoiPlayer.pause();
+                else
+                  audoiPlayer.resume();
+              }),
+          IconButton(icon: Icon(FontAwesomeIcons.arrowRight), onPressed: () {
+            audoiPlayer.next();
+          }),
+        ],
+      ),
+    );
   }
 }

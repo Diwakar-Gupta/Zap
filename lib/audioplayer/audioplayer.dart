@@ -1,15 +1,21 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:zap/models/music.dart';
+
+final audoiPlayer = AudioPlayerr();
 
 class AudioPlayerr {
-  static final _defaultPlayer = AudioPlayerr(); 
   final AudioPlayer _player = new AudioPlayer();
 
-  static AudioPlayerr getDefault(){
-    return _defaultPlayer;
+  AudioPlayer getAudioPlayer() {
+    return _player;
   }
 
-  AudioPlayer getAudioPlayer(){
-    return _player;
+  bool previous() {
+    return false;
+  }
+
+  bool next() {
+    return false;
   }
 
   Future<int> prepare(String url) async {
@@ -25,6 +31,11 @@ class AudioPlayerr {
     if (result == 1) {
       // success
     }
+    return result;
+  }
+
+  Future<int> playSong(Song song) async {
+    int result = await play(song.name,isLocal: true);
     return result;
   }
 
@@ -52,7 +63,7 @@ class AudioPlayerr {
     return result;
   }
 
-  Future<int> release() async{
+  Future<int> release() async {
     int result = await _player.release();
     return result;
   }

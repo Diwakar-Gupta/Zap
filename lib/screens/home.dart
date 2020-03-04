@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:zap/audioplayer/audioplayer.dart';
 import 'package:zap/models/music.dart';
 
 class HomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -27,7 +29,9 @@ class _SongWidgetState extends State<SongWidget> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      //selected: playingSong == widget.song ? true : false,
+      onTap: (){
+        audoiPlayer.playSong(widget.song);
+      },
       leading: CircleAvatar(
         radius: 25,
         backgroundImage: AssetImage(widget.song.imgPath),
